@@ -1,8 +1,8 @@
-import { type ReactNode } from "react";
+import { JSX, type ReactNode } from "react";
 
 export interface TableColumn {
     title: string,
-    render?0: () => ReactNode
+    render?: () => JSX.Element
 }
 
 export interface TableProps<T> {

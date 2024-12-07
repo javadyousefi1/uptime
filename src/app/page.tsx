@@ -8,6 +8,8 @@ import { TableColumn } from "@/interfaces/table";
 
 export default function Home() {
 
+  
+
   const column: TableColumn[] = [
     { title: "id" },
     { title: "name" },
@@ -18,7 +20,7 @@ export default function Home() {
     {
       title: "More Detail", render: (object) => {
         console.log(object)
-        return <p>more</p>
+        return <button>more</button>
       }
     },
   ]
