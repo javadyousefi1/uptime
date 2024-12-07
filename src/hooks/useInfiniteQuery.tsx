@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 
 const useInfiniteQuery = ({ queryFn }) => {
@@ -9,18 +10,20 @@ const useInfiniteQuery = ({ queryFn }) => {
     const [pageIndex, setPageIndex] = useState(1);
 
     const handleFetchMore = () => {
-        if (hasNextPage) {
-            setPageIndex(prev => ++prev)
+        if (hasNextPage && !isLoading) {
+          setPageIndex((prev) => prev + 1);
         }
-    }
+      };
 
     useEffect(() => {
-        if (hasNextPage === false) return
+        if (hasNextPage === false || data.length === totalCount) return
         setIsLoading(true)
         queryFn({ pageSize: PAGE_SIZE, pageIndex: pageIndex }).then(res => {
             if (!totalCount) setTotalCount(res.data.totalCount)
 
             const newData = res.data.items
+            setData((prev) => [...prev, ...newData]);
+
             console.log(data, "log amir")
             const newStateValue = [...data, ...newData]
 
@@ -33,7 +36,6 @@ const useInfiniteQuery = ({ queryFn }) => {
                 setHasNextPage(true)
             }
 
-            setData(newStateValue)
             setIsLoading(false)
         })
 

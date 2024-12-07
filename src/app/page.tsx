@@ -7,7 +7,6 @@ import { IAssetsData } from "@/interfaces/assets";
 // interface
 import { TableColumn } from "@/interfaces/table";
 import { apiGetAllAssets } from "@/services/assets";
-import { useEffect, useState } from "react";
 
 export default function Home() {
 
