@@ -1,6 +1,7 @@
 const PageHeader = () => {
     return (<header className=" border-b border-gray-200 pb-10">
-        <h1 className="text-lg font-bold text-center"></h1>
+        <h1 className="text-lg font-bold text-center">Uptime Task</h1>
+  
     </header>);
 }
 

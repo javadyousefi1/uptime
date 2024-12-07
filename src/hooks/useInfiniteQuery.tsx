@@ -9,37 +9,29 @@ const useInfiniteQuery = ({ queryFn }) => {
     const [data, setData] = useState([]);
     const [pageIndex, setPageIndex] = useState(1);
 
-    console.log(hasNextPage, "hasNextPage")
     const handleFetchMore = () => {
-        console.log("object")
         if (hasNextPage && !isLoading) {
             setPageIndex((prev) => prev + 1);
         }
     };
 
     useEffect(() => {
-        if (hasNextPage === false || data.length === totalCount) return
-        setIsLoading(true)
+        // set hasNextPage status for controlling next request
+        if (data.length === totalCount) {
+            setHasNextPage(false)
+        } else {
+            setHasNextPage(true)
+        }
+        if (hasNextPage === false || data.length === totalCount) return // prevent extra request if all data gets successfully
+        setIsLoading(true) // set loading 
         queryFn({ pageSize: PAGE_SIZE, pageIndex: pageIndex }).then(res => {
             if (!totalCount) setTotalCount(res.data.totalCount)
-
             const newData = res.data.items
-            setData((prev) => [...prev, ...newData]);
-
-            const newStateValue = [...data, ...newData]
-
-            // console.log("newStateValue.length", newStateValue.length)
-            // console.log("totalCount", totalCount)
-
-            if (newStateValue.length === totalCount) {
-                setHasNextPage(false)
-            } else {
-                setHasNextPage(true)
-            }
-
+            setData((prev) => [...prev, ...newData]); // concat new data with old data
             setIsLoading(false)
+        }).catch(err => {
+            console.log(err)
         })
-
 
     }, [pageIndex])
 

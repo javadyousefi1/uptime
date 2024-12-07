@@ -2,7 +2,7 @@ import { JSX, type ReactNode } from "react";
 
 export interface TableColumn {
     title: string,
-    render?: () => JSX.Element
+    render?: (data: any) => JSX.Element
 }
 
 export interface TableProps<T> {

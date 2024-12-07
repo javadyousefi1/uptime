@@ -2,19 +2,16 @@
 // components
 import PageHeader from "@/components/PageHeader";
 import Table from "@/components/table/Table";
+// hooks
 import useInfiniteQuery from "@/hooks/useInfiniteQuery";
-import { IAssetsData } from "@/interfaces/assets";
 // interface
+import { IAssetsData } from "@/interfaces/assets";
 import { TableColumn } from "@/interfaces/table";
 import { apiGetAllAssets } from "@/services/assets";
 
 export default function Home() {
 
   const { data, handleFetchMore, hasNextPage, isLoading } = useInfiniteQuery({ queryFn: apiGetAllAssets })
-  // console.log(data, "data")
-  // console.log(isLoading, "isLoading")
-
-
 
   const column: TableColumn[] = [
     { title: "id" },
@@ -33,7 +30,6 @@ export default function Home() {
   return (
     <main className="container mx-auto mt-10 h-full">
       <PageHeader />
-      <button onClick={()=>handleFetchMore()}>freerferferf</button>
       <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading}/>
     </main>
   );
