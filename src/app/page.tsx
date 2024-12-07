@@ -31,7 +31,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="container mx-auto mt-10">
+    <main className="container mx-auto mt-10 h-full">
       <PageHeader />
       <button onClick={()=>handleFetchMore()}>freerferferf</button>
       <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading}/>

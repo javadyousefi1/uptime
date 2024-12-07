@@ -10,6 +10,7 @@ const useInfiniteQuery = ({ queryFn }) => {
     const [pageIndex, setPageIndex] = useState(1);
 
     const handleFetchMore = () => {
+        console.log("handle fetch more rns")
         if (hasNextPage && !isLoading) {
           setPageIndex((prev) => prev + 1);
         }
