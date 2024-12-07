@@ -2,11 +2,18 @@
 // components
 import PageHeader from "@/components/PageHeader";
 import Table from "@/components/table/Table";
+import useInfiniteQuery from "@/hooks/useInfiniteQuery";
 import { IAssetsData } from "@/interfaces/assets";
 // interface
 import { TableColumn } from "@/interfaces/table";
+import { apiGetAllAssets } from "@/services/assets";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const { data, handleFetchMore, hasNextPage, isLoading } = useInfiniteQuery({ queryFn: apiGetAllAssets })
+  console.log(data, "data")
+  console.log(isLoading, "isLoading")
 
 
 
@@ -19,7 +26,6 @@ export default function Home() {
     { title: "engineHours" },
     {
       title: "More Detail", render: (object) => {
-        // console.log(object)
         return <button>more</button>
       }
     },
@@ -28,7 +34,8 @@ export default function Home() {
   return (
     <main className="container mx-auto mt-10">
       <PageHeader />
-      <Table<IAssetsData> column={column} />
+      <button onClick={()=>handleFetchMore()}>freerferferf</button>
+      <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading}/>
     </main>
   );
 }
