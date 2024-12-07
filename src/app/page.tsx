@@ -11,8 +11,8 @@ import { apiGetAllAssets } from "@/services/assets";
 export default function Home() {
 
   const { data, handleFetchMore, hasNextPage, isLoading } = useInfiniteQuery({ queryFn: apiGetAllAssets })
-  console.log(data, "data")
-  console.log(isLoading, "isLoading")
+  // console.log(data, "data")
+  // console.log(isLoading, "isLoading")
 
 
 

@@ -1,16 +1,37 @@
 "use client"
 import { TableProps } from "@/interfaces/table";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Table<T>({ column, data = [], handleFetchMore, hasNextPage, isLoading }: TableProps<T>) {
+
+    const [hasScroll, setHasScroll] = useState(false);
+
+    useEffect(() => {
+        const checkScroll = () => {
+            if (document.documentElement.scrollHeight <= window.innerHeight) {
+                console.log('No vertical scroll');
+                setHasScroll(false);
+                handleFetchMore()
+            } else {
+                setHasScroll(true);
+            }
+        };
+
+        checkScroll(); // Check on mount
+        window.addEventListener('resize', checkScroll); // Check on resize
+
+        return () => {
+            window.removeEventListener('resize', checkScroll); // Cleanup
+        };
+    }, [data]);
 
     const columnList = useMemo(() => column?.map(item => item.title), [column])
     return (
         <>
             <div id="scrollableDiv" style={{ height: "100%", overflow: "auto" }}>
                 <InfiniteScroll
-                    dataLength={53}
+                    dataLength={data?.length}
                     next={handleFetchMore}
                     hasMore={true}
                     // pullDownToRefresh
