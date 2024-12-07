@@ -1,3 +1,4 @@
+"use client"
 // components
 import PageHeader from "@/components/PageHeader";
 import Table from "@/components/table/Table";
@@ -14,6 +15,12 @@ export default function Home() {
     { title: "driverName" },
     { title: "vinCode" },
     { title: "engineHours" },
+    {
+      title: "More Detail", render: (object) => {
+        console.log(object)
+        return <p>more</p>
+      }
+    },
   ]
 
   return (

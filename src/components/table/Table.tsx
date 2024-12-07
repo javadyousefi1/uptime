@@ -59,7 +59,7 @@ function Table<T>({ column }: TableProps<T>) {
             {data.map((item, index) => {
                 return (
                     <tr className="border">
-                        {columnList.map((innerItem,innerIndex) => <td key={`table-row-${item[innerItem]}-${index}-${innerIndex}`}>{item[innerItem] ?? "-"}</td>)}
+                        {column.map((innerItem, innerIndex) => <td key={`table-row-${item[innerItem.title]}-${index}-${innerIndex}`}>{innerItem.render ? innerItem.render(item) : item[innerItem.title]}</td>)}
                     </tr>
                 )
             })}
