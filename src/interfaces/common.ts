@@ -6,3 +6,8 @@ export interface IServerReuslt<T> {
     message: string | null,
     status: boolean
 }
+
+export interface IPagintateQuery {
+    pagesize:number,
+    pageIndex:number
+}
