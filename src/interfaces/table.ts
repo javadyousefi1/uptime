@@ -7,4 +7,8 @@ export interface TableColumn {
 
 export interface TableProps<T> {
     column: TableColumn[],
+    data: T[],
+    handleFetchMore: () => void,
+    hasNextPage: boolean,
+    isLoading: boolean
 }

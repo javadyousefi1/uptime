@@ -3,20 +3,22 @@ import { useState } from "react";
 // components
 import PageHeader from "@/components/PageHeader";
 import Table from "@/components/table/Table";
+import Modal from "@/components/Modal";
+import ModalContent from "@/components/ModalContent";
 // hooks
 import useInfiniteQuery from "@/hooks/useInfiniteQuery";
 // interface
 import { IAssetsData } from "@/interfaces/assets";
 import { TableColumn } from "@/interfaces/table";
+// services
 import { apiGetAllAssets } from "@/services/assets";
-import Modal from "@/components/Modal";
 
 export default function Home() {
-  const [tableModal, setTableModal] = useState<null | IAssetsData>(null)
+  const [tableModalContent, setTableModalContent] = useState<null | IAssetsData>(null)
   const { data, handleFetchMore, hasNextPage, isLoading } = useInfiniteQuery({ queryFn: apiGetAllAssets })
 
-  const handleSetTableModal = (payload: IAssetsData) => setTableModal(payload)
-  const handleCloseTableModal = () => setTableModal(null)
+  const handleSetTableModal = (payload: IAssetsData) => setTableModalContent(payload)
+  const handleCloseTableModal = () => setTableModalContent(null)
   const column: TableColumn[] = [
     { title: "id" },
     { title: "name" },
@@ -36,8 +38,8 @@ export default function Home() {
       <PageHeader />
       <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading} />
 
-      <Modal isOpen={!!tableModal} onClose={handleCloseTableModal} title={`More info (${tableModal?.name})`}>
-        <p>This is the modal content!</p>
+      <Modal isOpen={!!tableModalContent} onClose={handleCloseTableModal} title={`More info (${tableModalContent?.name})`}>
+        <ModalContent {...tableModalContent} />
       </Modal>
     </main>
   );

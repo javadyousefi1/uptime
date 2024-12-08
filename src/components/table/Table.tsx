@@ -1,10 +1,13 @@
 "use client";
-import { TableProps } from "@/interfaces/table";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
+// types
+import { TableColumn, TableProps } from "@/interfaces/table";
+// infinite
 import InfiniteScroll from "react-infinite-scroll-component";
+// components
 import Spinner from "../Spinner";
 
-function Table<T>({ column, data = [], handleFetchMore, hasNextPage, isLoading }: TableProps<T>) {
+function Table<T>({ data = [], column, handleFetchMore, hasNextPage }: TableProps<T>) {
 
     // get more data if the inner height more than or content
     useEffect(() => {
@@ -55,11 +58,11 @@ function Table<T>({ column, data = [], handleFetchMore, hasNextPage, isLoading }
                         <tbody>
                             {data.map((item: T, index: number) => (
                                 <tr
-                                    key={item.id ?? `table-row-${index}`}
+                                    key={`table-row-${index}`}
                                     className={`border-b ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
                                 >
                                     <td className="px-4 py-2 text-center">{index + 1}</td>
-                                    {column.map((col, colIndex) => (
+                                    {column.map((col: TableColumn, colIndex: number) => (
                                         <td key={`table-item-${index}-${colIndex}`} className="px-4 py-2 text-center">
                                             {col.render ? col.render(item) : (item[col.title] ?? "-")}
                                         </td>

@@ -8,6 +8,6 @@ export interface IServerReuslt<T> {
 }
 
 export interface IPagintateQuery {
-    pagesize:number,
+    pageSize:number,
     pageIndex:number
 }

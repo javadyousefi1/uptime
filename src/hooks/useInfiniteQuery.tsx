@@ -1,13 +1,15 @@
 "use client"
 import { useEffect, useState } from "react";
+// iterface
+import { type IUseInfiniteQuery } from "@/interfaces/hooks";
 
-const useInfiniteQuery = ({ queryFn }) => {
+const useInfiniteQuery = ({ queryFn }: IUseInfiniteQuery) => {
     const PAGE_SIZE = 10
+    const [data, setData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false)
     const [totalCount, setTotalCount] = useState(null)
-    const [hasNextPage, setHasNextPage] = useState<null | boolean>(true)
-    const [data, setData] = useState([]);
     const [pageIndex, setPageIndex] = useState(1);
+    const [hasNextPage, setHasNextPage] = useState<boolean>(true)
 
     const handleFetchMore = () => {
         if (hasNextPage && !isLoading) {

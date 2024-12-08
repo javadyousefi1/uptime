@@ -47,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">{title}</h2>
+          <h2 className="text-md font-semibold">{title}</h2>
           <button
             onClick={onClose}
             className="text-gray-600 hover:text-gray-800 p-1 rounded-full"
