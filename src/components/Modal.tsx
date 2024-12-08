@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
     >
       <div
         ref={modalRef}
-        className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-96"
+        className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-96 max-h-[70dvh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">

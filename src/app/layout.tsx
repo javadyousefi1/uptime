@@ -3,8 +3,8 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Uptime",
-  description: "a nice task from uptime",
+  title: "optime",
+  description: "a nice task from optime",
 };
 
 export default function RootLayout({
