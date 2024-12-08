@@ -15,7 +15,7 @@ import { apiGetAllAssets } from "@/services/assets";
 
 export default function Home() {
   const [tableModalContent, setTableModalContent] = useState<null | IAssetsData>(null)
-  const { data, handleFetchMore, hasNextPage, isLoading } = useInfiniteQuery({ queryFn: apiGetAllAssets })
+  const { data, handleFetchMore, hasNextPage, isLoading, error } = useInfiniteQuery({ queryFn: apiGetAllAssets })
 
   const handleSetTableModal = (payload: IAssetsData) => setTableModalContent(payload)
   const handleCloseTableModal = () => setTableModalContent(null)
@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <main className="container mx-auto mt-10 h-full">
       <PageHeader />
-      <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading} />
+      <Table<IAssetsData> column={column} data={data} handleFetchMore={handleFetchMore} hasNextPage={hasNextPage} isLoading={isLoading} error={error} />
 
       <Modal isOpen={!!tableModalContent} onClose={handleCloseTableModal} title={`More info (${tableModalContent?.name})`}>
         <ModalContent {...tableModalContent} />

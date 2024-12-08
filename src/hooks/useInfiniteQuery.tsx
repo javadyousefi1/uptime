@@ -6,6 +6,7 @@ import { type IUseInfiniteQuery } from "@/interfaces/hooks";
 const useInfiniteQuery = ({ queryFn }: IUseInfiniteQuery) => {
     const PAGE_SIZE = 10
     const [data, setData] = useState<any[]>([]);
+    const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false)
     const [totalCount, setTotalCount] = useState(null)
     const [pageIndex, setPageIndex] = useState(1);
@@ -32,13 +33,13 @@ const useInfiniteQuery = ({ queryFn }: IUseInfiniteQuery) => {
             setData((prev) => [...prev, ...newData]); // concat new data with old data
             setIsLoading(false)
         }).catch(err => {
-            console.log(err)
+            setError(true)
         })
 
     }, [pageIndex])
 
 
-    return { data, handleFetchMore, hasNextPage, isLoading }
+    return { data, handleFetchMore, hasNextPage, isLoading, error }
 
 }
 

@@ -10,5 +10,7 @@ export interface TableProps<T> {
     data: T[],
     handleFetchMore: () => void,
     hasNextPage: boolean,
-    isLoading: boolean
+    isLoading: boolean,
+    error: boolean,
+    
 }
