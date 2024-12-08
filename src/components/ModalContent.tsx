@@ -15,7 +15,7 @@ const ModalContent: React.FC<Partial<IAssetsData>> = ({ isDeleted, serviceList, 
         <TitleAndText title="odometer" text={odometer} />
         <TitleAndText title="vinCode" text={vinCode} />
         <TitleAndText title="fuelLevel" text={fuelLevel} />
-        <Tag color={isDeleted ? "blue" : "green"} text="is deleted" className="col-span-2" />
+        <Tag color={isDeleted ? "red" : "green"} text="is deleted" className="col-span-2" />
 
 
         <Divider title="service List" className="col-span-2" />
